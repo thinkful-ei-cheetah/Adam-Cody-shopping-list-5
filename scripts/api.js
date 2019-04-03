@@ -4,28 +4,23 @@ const api = (function (){
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/cody/items/';
 
   function getItems(){
-    return  fetch(BASE_URL + '', {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+    return  fetch(BASE_URL ); 
+      
   }
   
 
-  function createItem(name){
-    let newItem ={
+  const createItem =function (name){
+    const newItem = {
       name,
     };
-    return JSON.stringify(newItem);
-  }
-
-  //     return  fetch(BASE_URL + 'POST', {
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       }
-  //         .then(stringObj)
-  //     });
-  //   }
+    const stringObj = JSON.stringify(newItem);
+  
+    return  fetch(BASE_URL, {
+      method: 'POST',
+      headers:{'Content-Type': 'application/json'},
+      body: stringObj
+    });
+  };
 
   return {
     getItems,createItem
