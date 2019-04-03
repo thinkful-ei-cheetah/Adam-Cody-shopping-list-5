@@ -3,9 +3,10 @@
 
 // eslint-disable-next-line no-unused-vars
 const store = (function(){
-  const setError = (function (error){
+
+  const setError = function(error) {
     this.error = error;
-  });
+  };
 
   const addItem = function(item) {
     return this.items.push(item);

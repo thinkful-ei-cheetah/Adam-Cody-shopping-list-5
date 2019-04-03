@@ -25,6 +25,7 @@ const api = (function (){
             return data;
         });
   };
+
   function getItems(){
     return  listApiFetch(BASE_URL); 
       
@@ -59,6 +60,9 @@ const api = (function (){
   });
 
   return {
-    getItems,createItem,updateItem,deleteItem
+    getItems,
+    createItem,
+    updateItem,
+    deleteItem
   };
 }());
