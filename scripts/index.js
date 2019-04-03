@@ -16,20 +16,21 @@ $(document).ready(function() {
   //     items.forEach((item) => store.addItem(item));
   //     shoppingList.render();
   //   });
-  api.getItems()
-    .then(res => res.json())
-    .then((items) => {
-      const item = items[0];
-      return api.updateItem(item.id, { checked: true});
-    })
-    .then(res => res.json())
-    .then(() => console.log('updated!'));
+  // api.getItems()
+  //   .then(res => res.json())
+  //   .then((items) => {
+  //     const item = items[0];
+  //     return api.updateItem(item.id, { checked: true});
+  //   })
+  //   .then(res => res.json())
+  //   .then(() => console.log('updated!'));
+ 
  
 });
 
 
 
-// store.items.push(Item.create('apples'));
+store.items.push(Item.create('apples'));
 
 
   

@@ -17,7 +17,7 @@ const api = (function (){
   
     return  fetch(`${BASE_URL}`, {
       method: 'POST',
-      header:{'Content-Type': 'application/json'},
+      headers:{'Content-Type': 'application/json'},
       body: stringObj
     });
   };
@@ -26,7 +26,7 @@ const api = (function (){
     const stringy = JSON.stringify(updateData);
     return fetch(`${BASE_URL}/${id}`,{
       method:'PATCH',
-      header:{'Content-Type': 'application/json'},
+      headers:{'Content-Type': 'application/json'},
       body:stringy
     });
   });
