@@ -4,6 +4,15 @@
 // eslint-disable-next-line no-unused-vars
 const shoppingList = (function(){
 
+  function generateError(message) {
+    return `
+      <section class="error-content">
+        <button id="cancel-error">X</button>
+        <p>${message}</p>
+      </section>
+    `;
+  }
+
   function generateItemElement(item) {
     const checkedClass = item.checked ? 'shopping-item__checked' : '';
     const editBtnStatus = item.checked ? 'disabled' : '';
@@ -39,6 +48,15 @@ const shoppingList = (function(){
     const items = shoppingList.map((item) => generateItemElement(item));
     return items.join('');
   }
+
+  function renderError() {
+    if (store.error) {
+      const el = generateError(store.error);
+      $('.error-container').html(el);
+    } else {
+      $('.error-container').empty();
+    }
+  }
   
   
   function render() {
@@ -72,6 +90,10 @@ const shoppingList = (function(){
         .then((items) => {
           store.addItem(items);
           render();
+        })
+        .catch ((err) => {
+          store.setError(err.message);
+          renderError();
         });
       // store.addItem(newItemName);
       // render();
@@ -94,6 +116,10 @@ const shoppingList = (function(){
         .then(() => {
           store.findAndUpdate(id,{ checked: !itemToggle.checked});
           render();
+        })
+        .catch ((err) => {
+          store.setError(err.message);
+          renderError();
         });
     });
   }
@@ -109,6 +135,10 @@ const shoppingList = (function(){
           store.findAndDelete(id);
           // render the updated shopping list
           render();
+        })
+        .catch ((err) => {
+          store.setError(err.message);
+          renderError();
         });
     });
   }
@@ -124,9 +154,11 @@ const shoppingList = (function(){
           store.findAndUpdate(id, {name:itemName});
           store.setItemIsEditing(id, false);
           render();
+        })
+        .catch ((err) => {
+          store.setError(err.message);
+          renderError();
         });
-      // store.setItemIsEditing(id, false);
-      // render();
     });
   }
   
@@ -152,6 +184,13 @@ const shoppingList = (function(){
       render();
     });
   }
+
+  function handleCloseError() {
+    $('.error-container').on('click', '#cancel-error', () => {
+      store.setError(null);
+      renderError();
+    });
+  }
   
   function bindEventListeners() {
     handleNewItemSubmit();
@@ -161,6 +200,7 @@ const shoppingList = (function(){
     handleToggleFilterClick();
     handleShoppingListSearch();
     handleItemStartEditing();
+    handleCloseError();
   }
 
   // This object contains the only exposed methods from this module:
