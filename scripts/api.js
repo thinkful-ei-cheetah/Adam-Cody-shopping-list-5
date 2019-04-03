@@ -7,7 +7,12 @@ const api = (function (){
     return  fetch(BASE_URL); 
       
   }
+  const deleteItem = function(id){
+    return fetch(`${BASE_URL}/${id}`,{
+      method: 'DELETE',
   
+    });
+  };
 
   const createItem =function (name){
     const newItem = {
@@ -32,6 +37,6 @@ const api = (function (){
   });
 
   return {
-    getItems,createItem,updateItem
+    getItems,createItem,updateItem,deleteItem
   };
 }());
